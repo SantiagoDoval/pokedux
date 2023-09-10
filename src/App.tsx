@@ -4,8 +4,8 @@ import { Col, Row } from 'antd/es/grid'
 import logo from './assets/logo.svg'
 import { useEffect } from 'react'
 import './App.css'
-import { getPokemons } from './api/Api.js'
-import {setPokemons} from './actions'
+import { getPokemons,getPokemonDetails } from './api/Api.js'
+import {setPokemons,setPokemonDetails} from './actions'
 
 //With Connect
 // import { connect } from 'react-redux'
@@ -23,15 +23,12 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-
     const getData = async () => {
-      const gData = await getPokemons();
-      dispatch(setPokemons(gData));
+      const gData = await getPokemons();            
+      dispatch(setPokemonDetails(gData));
+      // dispatch(setPokemons(gData));
     };
-
     getData();
-
-
   }, [])
 
   return (
