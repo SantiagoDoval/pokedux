@@ -4,8 +4,10 @@ import { Col, Row } from 'antd/es/grid'
 import logo from './assets/logo.svg'
 import { useEffect } from 'react'
 import './App.css'
-import { getPokemons,getPokemonDetails } from './api/Api.js'
-import {setPokemons,setPokemonDetails} from './actions'
+import { getPokemons, getPokemonDetails } from './api/Api.js'
+import { setPokemons, setPokemonDetails, setLoader } from './actions'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
 //With Connect
 // import { connect } from 'react-redux'
@@ -19,13 +21,18 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
 
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
   const pokemons = useSelector((state: any) => state.pokemons)
+  const loader = useSelector((state: any) => state.loader)
   const dispatch = useDispatch()
 
   useEffect(() => {
     const getData = async () => {
-      const gData = await getPokemons();            
+      dispatch(setLoader(true))
+      const gData = await getPokemons();
       dispatch(setPokemonDetails(gData));
+      dispatch(setLoader(false))
       // dispatch(setPokemons(gData));
     };
     getData();
@@ -40,7 +47,13 @@ function App() {
         <Col style={{ margin: '50px auto 20px auto' }} span={8} offset={8}>
           <Searcher />
         </Col>
-        <PokemonList pokemonList={pokemons} />
+        {loader ? (
+          <Col offset={12}>
+            <Spin indicator={antIcon} style={{margin:'30px auto'}} />
+          </Col>
+        ) : (
+          <PokemonList pokemonList={pokemons} />
+        )}
       </div>
     </>
   )

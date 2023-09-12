@@ -13,7 +13,13 @@ const PokemonList:React.FC<PokemonListProps> = ({ pokemonList }) => {
         <>
             <div className='pokemonList'>
                 {pokemonList.map((pokemon:any) => (
-                    <PokemonCard key={pokemon.name} img={pokemon.sprites} name={pokemon.name} abilities={pokemon.abilities} />
+                    <PokemonCard 
+                        key={pokemon.name}
+                        img={pokemon.sprites} 
+                        name={pokemon.name} 
+                        abilities={pokemon.abilities} 
+                        pokemonID={pokemon.id} 
+                        favorite={pokemon.favorite} />
                 ))}
             </div>
         </>
