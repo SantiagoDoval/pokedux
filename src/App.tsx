@@ -14,7 +14,7 @@ import { Spin } from 'antd';
 // import {setPokemons as setPokemonsActions} from './actions'
 
 //With Redux Hooks
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 
 // function App({pokemons,setPokemons}:any) {
@@ -23,8 +23,9 @@ function App() {
 
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-  const pokemons = useSelector((state: any) => state.pokemons)
-  const loader = useSelector((state: any) => state.loader)
+  const pokemons = useSelector((state: any) => state.getIn(['data','pokemons'],shallowEqual).toJS())
+  const loader = useSelector((state: any) => state.getIn(['ui','loader']))
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
