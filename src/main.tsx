@@ -7,9 +7,10 @@ import thunk from 'redux-thunk';
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-import {logger,countPokemon} from './middleware/'
+import {countPokemon} from './middleware/'
 
-import rootReducer from "./reducers/rootReducer";
+import {rootReducer} from "./reducers/rootReducer";
+import {pokemonsReducer} from "./reducers/pokemons";
 
 const composeAlt=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

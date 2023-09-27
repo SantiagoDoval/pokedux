@@ -5,7 +5,7 @@ const initialState = fromJS({
   pokemons: [],
 });
 
-export const pokemonsReducer = (state=initialState, action) => {
+export const pokemonsReducer = (state=initialState, action:any) => {
   switch (action.type) {
     case SET_POKEMONS:
       // return { ...state, pokemons: action.payload };
